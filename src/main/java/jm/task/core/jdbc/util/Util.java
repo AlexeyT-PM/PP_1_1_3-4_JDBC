@@ -17,28 +17,21 @@ import java.util.Properties;
 public class Util {
     private final static String URL =
             "jdbc:mysql://localhost:3306/new_schema";
-//    &useLegacyDatetimeCode=false&serverTimezone=UTC
-//
-    /*    private final static String URLFIXED =
-                "jdbc:mysql://localhost:3306/new_schema?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true" +
-                        "&useLegacyDatetimeCode=false&serverTimezone=UTC";*/
     private final static String USERNAME = "root";
     private final static String PASSWORD = "root";
-
     public static Connection getConnection() {
         Connection connection;
-            try {
-                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                if (!connection.isClosed()) {
-                    System.out.println("Соединение с БД Установлено!");
-                }
-                if (connection.isClosed()) {
-                    System.out.println("Соединение с БД Закрыто!");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try  {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            if (!connection.isClosed()) {
+                System.out.println("Соединение с БД Установлено!");
             }
+            if (connection.isClosed()) {
+                System.out.println("Соединение с БД Закрыто!");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Ошибка при установлении соединения с БД: " + e.getMessage());
+        }
         return connection;
     }
-// реализуйте настройку соеденения с БД
 }
